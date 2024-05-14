@@ -95,27 +95,27 @@ async function sendUserData(){
 }
 
 
-// tesiting websockets using redis
-async function handleSock(){ 
+// // tesiting websockets using redis
+// async function handleSock(){ 
   
-  // sub();
-  const eventSource = new EventSource('wss://127.0.0.1:8787/ws')
+//   // sub();
+//   const eventSource = new EventSource('wss://127.0.0.1:8787/ws')
  
-  console.log("not yet inside listener",eventSource)
-  eventSource.addEventListener('message', (event) => {
-    // Parse the data received from the stream into JSON
-    // Add it the list of messages seen on the page
+//   console.log("not yet inside listener",eventSource)
+//   eventSource.addEventListener('message', (event) => {
+//     // Parse the data received from the stream into JSON
+//     // Add it the list of messages seen on the page
    
-    const tmp = JSON.parse(event.data)
-    console.log(event.data);
-    eventSource.close()
-    // Do something with the obtained message
-  })
-  // As the component unmounts, close listener to SSE API
-  return () => {
-    eventSource.close()
-  }
-}
+//     const tmp = JSON.parse(event.data)
+//     console.log(event.data);
+//     eventSource.close()
+//     // Do something with the obtained message
+//   })
+//   // As the component unmounts, close listener to SSE API
+//   return () => {
+//     eventSource.close()
+//   }
+// }
 
 
 

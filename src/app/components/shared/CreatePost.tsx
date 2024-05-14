@@ -28,7 +28,7 @@ const dispatch = useDispatch<AppDispatch>();
 //using cloudfare websocket
     async function websocket() {
     console.log("call")
-      const newWs = new WebSocket(" ws://127.0.0.1:8787/ws/");
+      const newWs = new WebSocket("wss://coding-task.shishirkj08.workers.dev/ws");
 
       newWs.addEventListener('open', () => {
         console.log('Opened websocket');
