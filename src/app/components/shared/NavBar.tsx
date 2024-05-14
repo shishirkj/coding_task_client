@@ -4,6 +4,8 @@ import Image from 'next/image';
 import Button from './Button';
 import axios from 'axios';
 import { pusherClient } from "@/app/lib/pusher";
+import { ToastContainer,toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 
@@ -69,6 +71,7 @@ if(content.length!=0)
 
     if(res?.data.mssg)
       { 
+        toast.success("notification sent to everyone")
         await axios.post("https://coding-task.shishirkj08.workers.dev/api/v1/createNotification",{notification:content})
       }
   }
@@ -163,6 +166,21 @@ finally{
 
         </div>
       </nav>
+
+
+
+      <ToastContainer
+position="top-center"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="colored"
+/>
     </div>
   );
 }

@@ -1,15 +1,16 @@
 import Image from 'next/image'
 import Avatar from './Avatar'
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {useDispatch, useSelector } from 'react-redux'
 import { RootState,AppDispatch } from '../../store'
 import axios from 'axios'
 import { useAuth } from '@clerk/nextjs'
 import { CommentComponent } from '@/features/userData/userDataSlice'
 import Comment from './Comment'
-import CommentsLengthComponentToStore from '@/features/postData/postDataSlice'
 import { pusherClient } from '@/app/lib/pusher'
 import Loading from './Loading'
+import { ToastContainer,toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface postArrayType{ 
   content:string,
@@ -36,7 +37,7 @@ export default function MessageContainer() {
 
   const dispatch = useDispatch<AppDispatch>();
 
-  //from websocket
+  //from websocket create new post
   useEffect(() => {
     if (postContent) {
       // Adding new post to the existing posts array
@@ -129,9 +130,6 @@ return()=>{
 const handleLikeClick = async(index:string) => {
 try {
   
-  
-
-
 let noOflikes;
 for(let i =0;i<postArray.length;i++)
   {
@@ -146,13 +144,13 @@ for(let i =0;i<postArray.length;i++)
   //  ws?.send(content)
 
     const res = await axios.post(`${API_BASE_URL}/api/incrementLikes`,{likeCount:noOflikes,postId:index})
+    toast.success("Post Liked")
 
 if(res.data.mssg)
   { 
 
     const resp=await axios.put("https://coding-task.shishirkj08.workers.dev/api/v1/increaseLikeCount",{index:index})
   }
-
 
 
 } catch (error:unknown) {
@@ -252,7 +250,18 @@ function toggleCommentComponent(postId:number){
 
 
 
-  
+  <ToastContainer
+position="top-center"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="colored"
+/>
 
   </div>
 

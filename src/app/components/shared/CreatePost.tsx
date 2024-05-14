@@ -10,7 +10,8 @@ import { RootState,AppDispatch } from '../../store'
 import { PostComponent } from '@/features/userData/userDataSlice'
 import { useState } from 'react'
 import axios from 'axios'
-
+import { ToastContainer,toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 export default function CreatePost() {
@@ -73,15 +74,13 @@ const dispatch = useDispatch<AppDispatch>();
  
 
    const res = await axios.post(`${API_BASE_URL}/api/sendMessage`,{content:content})
-
-
+   toast.success("Post created")
    if(res?.data?.mssg)
     { console.log(res.data.mssg)
-      await axios.post("https://coding-task.shishirkj08.workers.dev/api/v1/createPost",{content:content,userId:id})
+     await axios.post("https://coding-task.shishirkj08.workers.dev/api/v1/createPost",{content:content,userId:id})
+    
           
     }
-
-
 
     setContent('') 
     dispatch(PostComponent())
@@ -181,6 +180,21 @@ const PostToogle = ()=>{
         </section>
     </footer>
         </main>
+
+
+        <ToastContainer
+position="top-center"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="colored"
+/>
+
     </div>
   )
 }

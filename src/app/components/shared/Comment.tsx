@@ -7,9 +7,12 @@ import { pusherClient } from "@/app/lib/pusher";
 import axios from "axios";
 import { CommentsLengthComponentToStore } from "@/features/postData/postDataSlice";
 import Loading from "./Loading";
+import { ToastContainer,toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+
+
 export default function Comment({roomId}:{roomId:string}) {
-
-
  const [comment,setComment] = useState<string>("") 
  const [commentArray,setCommentArray] = useState<Array<string>>([])
  const [loading,setLoading] = useState<boolean>(true)
@@ -55,18 +58,21 @@ if(comment.length!=0)
   {
     console.log(roomId)
     const res = await axios.post(`${API_BASE_URL}/api/sendComment`,{roomId:roomId,comment:comment})
+    toast.success("comment added")
     if(res?.data?.mssg)
       { 
         try {
           const {roomId,comment} =  res.data.mssg
-       await axios.put(" https://coding-task.shishirkj08.workers.dev/api/v1/addComment",{index:roomId,comment:comment})
+      await axios.put(" https://coding-task.shishirkj08.workers.dev/api/v1/addComment",{index:roomId,comment:comment})
      
         } catch (error:unknown) {
           console.log(error)
         }
         finally
         { 
+         
           setComment("")
+          
         }
          
       }
@@ -143,6 +149,18 @@ setComment(e.target.value)
           </div>
          
         </div>
+        <ToastContainer
+position="top-center"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="colored"
+/>
       </div>
     )
   }
