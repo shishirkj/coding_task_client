@@ -142,7 +142,7 @@ for(let i =0;i<postArray.length;i++)
   }
 
 
-  const API_BASE_URL =process.env.NEXT_PUBLIC_MODE === "production"? "https://blinkchat-nu.vercel.app": "http://localhost:3000";
+  const API_BASE_URL =process.env.NEXT_PUBLIC_MODE === "production"? "https://coding-task-eight.vercel.app": "http://localhost:3000";
   //  ws?.send(content)
 
     const res = await axios.post(`${API_BASE_URL}/api/incrementLikes`,{likeCount:noOflikes,postId:index})

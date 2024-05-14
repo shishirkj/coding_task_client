@@ -68,7 +68,7 @@ const dispatch = useDispatch<AppDispatch>();
 
   try {
     
-    const API_BASE_URL =process.env.NEXT_PUBLIC_MODE === "production"? "https://blinkchat-nu.vercel.app": "http://localhost:3000";
+    const API_BASE_URL =process.env.NEXT_PUBLIC_MODE === "production"? "https://coding-task-eight.vercel.app": "http://localhost:3000";
     //  ws?.send(content)
  
 
