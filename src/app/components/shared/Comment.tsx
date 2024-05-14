@@ -12,9 +12,9 @@ export default function Comment({roomId}:{roomId:string}) {
 
  const [comment,setComment] = useState<string>("") 
  const [commentArray,setCommentArray] = useState<Array<string>>([])
+ const [loading,setLoading] = useState<boolean>(true)
     const dispatch = useDispatch<AppDispatch>();
 
-let p
 
 
   //comment creation thru websocket
@@ -85,6 +85,7 @@ useEffect(()=>{
       const res = await axios.get(`https://coding-task.shishirkj08.workers.dev/api/v1/getComment/${roomId}`)
         const content= res?.data?.mssg
         setCommentArray(content)
+        setLoading(false)
   } 
   catch (error:any) {
     console.log(error)
@@ -126,7 +127,7 @@ setComment(e.target.value)
           <div className="h-64 overflow-y-auto">
             <div className="space-y-4">
 
-             {(commentArray.length!=0)?commentArray.map((comment,index)=>( 
+             {loading?<Loading/>:(commentArray.length!=0)?commentArray.map((comment,index)=>( 
                 <div key={index}>
                   <div className="flex items-start">      
                <div className="bg-gray-100 rounded-lg p-4 flex-1">
@@ -134,7 +135,7 @@ setComment(e.target.value)
                </div>
              </div>
                         </div>
-             )):<Loading/>}
+             )):<div>No comments</div>}
               
         
             </div>
